@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -24,7 +25,7 @@ public class UserService {
     private ModelMapper modelMapper;
 
     public void validateTransaction(User sender, BigDecimal amount) throws Exception {
-        if(sender.getUserType() == UserTypeEnum.MERCHANT){
+        if (sender.getType().equals(UserTypeEnum.MERCHANT.getValue())) {
             throw new UnauthorizedException("O user Lojista não está autorizado a realizar transação");
         }
 
@@ -51,16 +52,14 @@ public class UserService {
 
     public UserDTO getUserById(Long id) {
         User user = findUserById(id);
-        UserDTO userDTO = new UserDTO();
-        modelMapper.map(user, userDTO);
-        return userDTO;
+        return modelMapper.map(user, UserDTO.class);
     }
 
     public List<UserDTO> getAllUsers(){
         List<User> userList = userRepository.findAll();
-        List<UserDTO> userDTOList = new ArrayList<>();
-        modelMapper.map(userList, userDTOList);
-        return userDTOList;
+        return userList.stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
     }
 
 }

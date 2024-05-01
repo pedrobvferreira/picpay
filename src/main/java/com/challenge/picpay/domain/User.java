@@ -21,6 +21,5 @@ public class User {
     private String email;
     private String pass;
     private BigDecimal balance;
-    @Column(name = "user_type")
-    private UserTypeEnum userType;
+    private String type;
 }

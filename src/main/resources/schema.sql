@@ -8,10 +8,11 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(100),
     pass VARCHAR(100),
     balance DECIMAL(10, 2),
-    user_type VARCHAR(100)
+    type VARCHAR(100)
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS email_idx ON users (email);
+CREATE UNIQUE INDEX IF NOT EXISTS cpf_idx ON users (cpf);
 
 CREATE TABLE IF NOT EXISTS transactions (
     id SERIAL PRIMARY KEY,

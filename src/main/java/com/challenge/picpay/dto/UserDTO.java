@@ -26,5 +26,6 @@ public class UserDTO{
     @NotBlank
     private String pass;
     @NotNull
-    private String userType;
+    @NotBlank
+    private String type;
 }
