@@ -22,15 +22,4 @@ public class User {
     private String pass;
     private BigDecimal balance;
     private UserTypeEnum userType;
-
-    public User() {};
-
-    public User(UserDTO data){
-        this.name = data.getName();
-        this.balance = data.getBalance();
-        this.userType = UserTypeEnum.valueOf(data.getUserType());
-        this.pass = data.getPass();
-        this.cpf = data.getCpf();
-        this.email = data.getEmail();
-    }
 }
