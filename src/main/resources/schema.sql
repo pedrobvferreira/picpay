@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS transactions;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
+    id int AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
     cpf VARCHAR(100),
     email VARCHAR(100),
@@ -15,7 +15,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS email_idx ON users (email);
 CREATE UNIQUE INDEX IF NOT EXISTS cpf_idx ON users (cpf);
 
 CREATE TABLE IF NOT EXISTS transactions (
-    id SERIAL PRIMARY KEY,
+    id int AUTO_INCREMENT PRIMARY KEY,
     amount DECIMAL(10, 2),
     sender INT,
     receiver INT,

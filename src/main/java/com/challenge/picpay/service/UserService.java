@@ -35,9 +35,8 @@ public class UserService {
     }
 
     public UserDTO createUser(UserDTO userDTO){
-        User newUser = new User();
+        User newUser = modelMapper.map(userDTO, User.class);
         saveUser(newUser);
-        modelMapper.map(userDTO, newUser);
         return userDTO;
     }
 
