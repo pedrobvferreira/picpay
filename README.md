@@ -1,4 +1,5 @@
-Picpay API
+# Picpay API
+
 Java Spring Licence
 
 This project is an API built in Java, Spring, H2 as the database.
