@@ -28,13 +28,12 @@ GET /users - Retrieve a list of all users.
 [
     {
         "id": 1,
-        "firstName": "Pedro",
-        "lastName": "Silva",
-        "document": "123456787",
+        "name": "Pedro Silva",
+        "cpf": "123456787",
         "email": "pedro@example.com",
-        "password": "senha",
+        "pass": "senha",
         "balance": 20.00,
-        "userType": "MERCHANT"
+        "type": "MERCHANT"
     }
 ]
 ```
@@ -44,13 +43,12 @@ POST /users - Register a new user into the App
 ```
 ```
 {
-    "firstName": "Lucas",
-    "lastName": "Silva",
+    "name": "Lucas Silva",
     "password": "senha",
-    "document": "123456783",
+    "cpf": "123456783",
     "email": "lucas@example.com",
-    "userType": "COMMON",
-    "balance": 10
+    "type": "COMMON",
+    "balance": 10.00
 }
 ```
 POST TRANSACTIONS
@@ -59,7 +57,7 @@ POST /transactions - Register a new Transaction between users (COMMON to COMMON 
 ```
 ```
 {
-  "senderId": 4,
+  "senderId": 2,
   "receiverId": 1,
   "value": 10
 }
