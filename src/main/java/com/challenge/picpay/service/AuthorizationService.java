@@ -2,6 +2,9 @@ package com.challenge.picpay.service;
 
 import com.challenge.picpay.domain.User;
 import java.util.Map;
+
+import com.challenge.picpay.dto.AuthorizationDTO;
+import com.challenge.picpay.exception.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -22,11 +25,13 @@ public class AuthorizationService {
     private String authApiUrl;
 
     public boolean authorizeTransaction(User sender, BigDecimal value){
-        ResponseEntity<Map> authorizationResponse = restTemplate.getForEntity(this.authApiUrl, Map.class);
+        ResponseEntity<AuthorizationDTO> authorizationResponse =
+                restTemplate.getForEntity(this.authApiUrl, AuthorizationDTO.class);
 
         if(authorizationResponse.getStatusCode() == HttpStatus.OK){
-            String message = (String) Objects.requireNonNull(authorizationResponse.getBody()).get("message");
-            return "Autorizado".equalsIgnoreCase(message);
-        } else return false;
+            return Objects.requireNonNull(authorizationResponse.getBody()).isAuthorized();
+        } else{
+            throw new UnauthorizedException("Unauthorized!");
+        }
     }
 }

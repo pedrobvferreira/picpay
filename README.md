@@ -14,7 +14,8 @@ Usage
 ---
 1. Start the application with Maven
 2. The API will be accessible at http://localhost:8080
-   
+3. The DB will be accessible at http://localhost:8080/h2-console
+
 API Endpoints
 ---
 The API provides the following endpoints:

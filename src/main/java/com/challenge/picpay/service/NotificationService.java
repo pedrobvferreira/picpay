@@ -23,7 +23,7 @@ public class NotificationService {
     @Value("${app.notificationApi}")
     private String notificationApiUrl;
 
-    public void sendNotification(User user, String message) throws Exception{
+    public void sendNotification(User user, String message) {
         String email = user.getEmail();
         NotificationDTO notificationRequest = new NotificationDTO(email, message);
 

@@ -5,6 +5,7 @@ import com.challenge.picpay.domain.User;
 import com.challenge.picpay.dto.TransactionDTO;
 import com.challenge.picpay.exception.UnauthorizedException;
 import com.challenge.picpay.repository.TransactionRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,17 +32,21 @@ public class TransactionService {
         return transaction;
     }
 
+    @Transactional
     public Transaction saveTransaction(TransactionDTO transaction) throws Exception {
+        //1- Validar
         User sender = userService.findUserById(transaction.getSenderId());
         User receiver = userService.findUserById(transaction.getReceiverId());
 
         userService.validateTransaction(sender, transaction.getValue());
 
+        //2- Autorizar a Transacao
         boolean isAuthorized = authService.authorizeTransaction(sender, transaction.getValue());
         if(!isAuthorized){
             throw new UnauthorizedException("Transação não autorizada");
         }
 
+        //3- Criar a Transacao
         Transaction newTransaction = new Transaction();
         newTransaction.setAmount(transaction.getValue());
         newTransaction.setSender(sender);
@@ -55,6 +60,7 @@ public class TransactionService {
         userService.saveUser(sender);
         userService.saveUser(receiver);
 
+        //4- Enviar a notificacao
         notificationService.sendNotification(sender, "Transação realizada com sucesso");
         notificationService.sendNotification(receiver, "Transação recebida com sucesso");
 

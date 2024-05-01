@@ -9,7 +9,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findUserByCpf(String cpf);
-
     Optional<User> findUserById(Long id);
 }

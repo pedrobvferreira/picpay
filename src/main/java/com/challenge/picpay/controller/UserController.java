@@ -10,26 +10,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/v1/users/")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping
+    @PostMapping("internal/createUser")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user){
         UserDTO newUser = userService.createUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("getUser/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable("id") Long id){
         UserDTO newUser = userService.getUserById(id);
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers(){
+    @GetMapping("getUsers")
+    public ResponseEntity<List<UserDTO>> getUsers(){
         List<UserDTO> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }

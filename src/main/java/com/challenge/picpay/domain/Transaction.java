@@ -20,5 +20,6 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name="receiver_id")
     private User receiver;
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 }

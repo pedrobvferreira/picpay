@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/transactions")
+@RequestMapping("/v1/transactions")
 public class TransactionController {
 
     @Autowired
     private TransactionService transactionService;
 
-    @PostMapping
-    public ResponseEntity<TransactionDTO> createTransaction(@RequestBody TransactionDTO transaction) throws Exception {
+    @PostMapping("internal/createTransaction")
+    public ResponseEntity<TransactionDTO> createTransaction(
+            @RequestBody TransactionDTO transaction) throws Exception {
         TransactionDTO newTransaction = transactionService.createTransaction(transaction);
         return new ResponseEntity<>(newTransaction, HttpStatus.OK);
     }
