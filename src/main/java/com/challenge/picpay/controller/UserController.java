@@ -16,19 +16,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("internal/createUser")
+    @PostMapping("private/createUser")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO user){
         UserDTO newUser = userService.createUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @GetMapping("getUser/{id}")
+    @GetMapping("public/getUser/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable("id") Long id){
         UserDTO newUser = userService.getUserById(id);
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
-    @GetMapping("getUsers")
+    @GetMapping("public/getUsers")
     public ResponseEntity<List<UserDTO>> getUsers(){
         List<UserDTO> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);

@@ -5,10 +5,11 @@ CREATE TABLE IF NOT EXISTS users (
     id int AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
     cpf VARCHAR(100),
-    email VARCHAR(100),
-    pass VARCHAR(100),
+    email VARCHAR(500),
+    pass TEXT,
     balance DECIMAL(10, 2),
-    type VARCHAR(100)
+    type TEXT NOT NULL,
+    role TEXT NOT NULL
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS email_idx ON users (email);
