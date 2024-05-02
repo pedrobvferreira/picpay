@@ -25,7 +25,7 @@ public class UserService {
     private ModelMapper modelMapper;
 
     public void validateTransaction(User sender, BigDecimal amount) throws Exception {
-        if (sender.getType().equals(UserTypeEnum.MERCHANT.getValue())) {
+        if (sender.getType().equals(UserTypeEnum.MERCHANT)) {
             throw new UnauthorizedException("O user Lojista não está autorizado a realizar transação");
         }
 
