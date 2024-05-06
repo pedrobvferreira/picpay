@@ -7,8 +7,10 @@ import com.challenge.picpay.exception.InsufficientBalanceException;
 import com.challenge.picpay.exception.NotFoundException;
 import com.challenge.picpay.exception.UnauthorizedException;
 import com.challenge.picpay.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 public class UserService {
 
@@ -34,6 +37,10 @@ public class UserService {
         }
     }
 
+    public UserDetails findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
     public UserDTO createUser(UserDTO userDTO){
         User newUser = modelMapper.map(userDTO, User.class);
         saveUser(newUser);
@@ -45,7 +52,7 @@ public class UserService {
     }
 
     public User findUserById(Long id) {
-        return userRepository.findUserById(id).orElseThrow(() ->
+        return userRepository.findById(id).orElseThrow(() ->
                 new NotFoundException("User não encontrado"));
     }
 

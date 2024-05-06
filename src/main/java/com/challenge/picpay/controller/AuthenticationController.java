@@ -1,12 +1,15 @@
 package com.challenge.picpay.controller;
 
 import com.challenge.picpay.domain.User;
+import com.challenge.picpay.domain.enums.UserRole;
 import com.challenge.picpay.dto.AuthenticationDTO;
 import com.challenge.picpay.dto.LoginResponseDTO;
-import com.challenge.picpay.dto.RegisterDTO;
-import com.challenge.picpay.repository.UserRepository;
+import com.challenge.picpay.dto.RegisterRequestDTO;
+import com.challenge.picpay.dto.UserDTO;
 import com.challenge.picpay.service.TokenService;
+import com.challenge.picpay.service.UserService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,22 +21,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+
+@AllArgsConstructor
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
-    private UserRepository repository;
-
+    private UserService userService;
     @Autowired
     private TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data){
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.getLogin(), data.getPassword());
+        var usernamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getPassword());
         var auth = authenticationManager.authenticate(usernamePassword);
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
@@ -41,19 +45,23 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody @Valid RegisterDTO data){
-        if(repository.findUserByEmail(data.getLogin()) != null) {
+    public ResponseEntity<UserDTO> register(@RequestBody @Valid RegisterRequestDTO data){
+        if(userService.findByEmail(data.getEmail()) == null) {
             return ResponseEntity.badRequest().build();
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.getPassword());
-        User newUser = new User();
-        newUser.setEmail(data.getLogin());
-        newUser.setPass(encryptedPassword);
-        newUser.setRole(data.getRole());
+        UserDTO newUserDto = new UserDTO(
+                data.getName(),
+                null,
+                data.getEmail(),
+                encryptedPassword,
+                new BigDecimal("0.00"),
+                data.getType(),
+                UserRole.USER);
 
-        repository.save(newUser);
+        userService.createUser(newUserDto);
 
-        return new ResponseEntity<>(newUser, HttpStatus.OK);
+        return new ResponseEntity<>(newUserDto, HttpStatus.OK);
     }
 }

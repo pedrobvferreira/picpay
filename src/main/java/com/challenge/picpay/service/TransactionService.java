@@ -6,12 +6,14 @@ import com.challenge.picpay.dto.TransactionDTO;
 import com.challenge.picpay.exception.UnauthorizedException;
 import com.challenge.picpay.repository.TransactionRepository;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
 @Service
 public class TransactionService {
 

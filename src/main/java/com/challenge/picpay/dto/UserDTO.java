@@ -1,5 +1,7 @@
 package com.challenge.picpay.dto;
 
+import com.challenge.picpay.domain.enums.UserRole;
+import com.challenge.picpay.domain.enums.UserTypeEnum;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,14 +20,14 @@ public class UserDTO{
     private String name;
     private String cpf;
     @NotNull
-    private BigDecimal balance;
-    @NotNull
     @NotBlank
     private String email;
     @NotNull
     @NotBlank
     private String pass;
     @NotNull
-    @NotBlank
-    private String type;
+    private BigDecimal balance;
+    private UserTypeEnum type;
+    private UserRole role;
+
 }

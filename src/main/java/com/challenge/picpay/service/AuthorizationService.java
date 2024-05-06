@@ -1,10 +1,9 @@
 package com.challenge.picpay.service;
 
 import com.challenge.picpay.domain.User;
-import java.util.Map;
-
 import com.challenge.picpay.dto.AuthorizationDTO;
 import com.challenge.picpay.exception.UnauthorizedException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@AllArgsConstructor
 @Service
 public class AuthorizationService {
 
