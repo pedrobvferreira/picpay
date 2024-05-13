@@ -13,8 +13,8 @@ Clone the repository:
 Usage
 ---
 1. Start the application with Maven
-2. The API will be accessible at http://localhost:8080
-3. The DB will be accessible at http://localhost:8080/h2-console
+2. The API will be accessible at http://localhost:8081
+3. The DB will be accessible at http://localhost:8081/h2-console
 
 API Endpoints
 ---

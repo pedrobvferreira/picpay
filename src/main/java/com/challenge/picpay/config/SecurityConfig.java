@@ -15,6 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +30,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(antMatcher("/h2-console/**")).permitAll()
+                .requestMatchers(toH2Console()).permitAll()
                 .requestMatchers(antMatcher("/auth/login")).permitAll()
                 .requestMatchers(antMatcher("/auth/register")).permitAll()
                 .requestMatchers(antMatcher("/logout")).permitAll()
