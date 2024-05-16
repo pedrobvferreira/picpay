@@ -1,7 +1,7 @@
 package com.challenge.picpay.controller;
 
 import com.challenge.picpay.domain.User;
-import com.challenge.picpay.domain.enums.UserRole;
+import com.challenge.picpay.enums.UserRole;
 import com.challenge.picpay.dto.AuthenticationDTO;
 import com.challenge.picpay.dto.LoginResponseDTO;
 import com.challenge.picpay.dto.RegisterRequestDTO;

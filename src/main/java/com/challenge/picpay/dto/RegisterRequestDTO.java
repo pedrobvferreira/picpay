@@ -1,6 +1,6 @@
 package com.challenge.picpay.dto;
 
-import com.challenge.picpay.domain.enums.UserTypeEnum;
+import com.challenge.picpay.enums.UserTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

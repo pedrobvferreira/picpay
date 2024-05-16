@@ -1,7 +1,7 @@
 package com.challenge.picpay.dto;
 
-import com.challenge.picpay.domain.enums.UserRole;
-import com.challenge.picpay.domain.enums.UserTypeEnum;
+import com.challenge.picpay.enums.UserRole;
+import com.challenge.picpay.enums.UserTypeEnum;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

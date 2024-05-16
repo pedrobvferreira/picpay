@@ -1,7 +1,7 @@
 package com.challenge.picpay.service;
 
 import com.challenge.picpay.domain.User;
-import com.challenge.picpay.domain.enums.UserTypeEnum;
+import com.challenge.picpay.enums.UserTypeEnum;
 import com.challenge.picpay.dto.UserDTO;
 import com.challenge.picpay.exception.InsufficientBalanceException;
 import com.challenge.picpay.exception.NotFoundException;
@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,7 +1,7 @@
 package com.challenge.picpay.domain;
 
-import com.challenge.picpay.domain.enums.UserRole;
-import com.challenge.picpay.domain.enums.UserTypeEnum;
+import com.challenge.picpay.enums.UserRole;
+import com.challenge.picpay.enums.UserTypeEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,8 +33,9 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(this.role == UserRole.ADMIN) {
             return List.of(
-                    new SimpleGrantedAuthority("ROLE_ADMIN"),
-                    new SimpleGrantedAuthority("ROLE_USER"));
+                //Roles do Spring Security
+                new SimpleGrantedAuthority("ROLE_ADMIN"),
+                new SimpleGrantedAuthority("ROLE_USER"));
         }
         else {
             return List.of(new SimpleGrantedAuthority("ROLE_USER"));
