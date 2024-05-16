@@ -22,7 +22,7 @@ public class TransactionService {
     @Autowired
     private UserService userService;
     @Autowired
-    private AuthorizationService authService;
+    private AuthorizationTransactionService authService;
     @Autowired
     private NotificationService notificationService;
     @Autowired
